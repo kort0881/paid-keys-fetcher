@@ -1,0 +1,24 @@
+name: Fetch Paid Keys
+
+on:
+  schedule:
+    - cron: '0 3 * * *'
+  workflow_dispatch:
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      - run: pip install requests
+      - run: python fetch_paid_keys.py
+        env:
+          PAID_URL: ${{ secrets.PAID_URL }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: paid-keys
+          path: results/paid.txt
+          retention-days: 1
