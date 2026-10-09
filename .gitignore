@@ -1,6 +1,13 @@
 __pycache__/
 *.pyc
+*.pyo
+*.pyd
+
 .env
+.env.*
+
 results/
-*.zip
 artifacts/
+
+*.zip
+*.log
